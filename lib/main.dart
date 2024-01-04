@@ -28,18 +28,21 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DeviceInforService dis = DeviceInforService();
-    return Center(
-      child: FutureBuilder(
-        future: dis.deviceInfo,
-        builder: (context, snapshot) {
-          Widget wg;
-          if (snapshot.hasData) {
-            wg = Text("OS detected: ");
-          } else {
-            wg = CircularProgressIndicator();
-          }
-          return wg;
-        },
+    return Scaffold(
+      body: Center(
+        child: FutureBuilder(
+          future: dis.deviceInfo,
+          builder: (context, snapshot) {
+            Widget wg;
+            if (snapshot.hasData) {
+              // String data = snapshot.data as String;
+              wg = Text("${snapshot.data}");
+            } else {
+              wg = const CircularProgressIndicator();
+            }
+            return wg;
+          },
+        ),
       ),
     );
   }
