@@ -33,24 +33,15 @@ class MyHomePage extends StatelessWidget {
         future: dis.deviceInfo,
         builder: (context, snapshot) {
           List<Text> data = [];
-          // Widget wg;
           if (snapshot.hasData) {
-            print(snapshot.data);
-              snapshot.data?.forEach((key, value) {data.add(Text(value));});
-            //   // String data = snapshot.data as String;
-            //   // wg = Text("${snapshot.data}");
-            // return const Text("data");
+              snapshot.data?.forEach((key, value) {data.add(Text("$value"));});
             return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: data,
             );
           } else {
-            print("Have not data");
-            //   snapshot.data?.forEach((key, value) {data.add(Text(value));});
             return const CircularProgressIndicator();
           }
-          return const Column(
-            children: [Text("data")],
-          );
         },
       ),
     );
