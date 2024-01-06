@@ -6,15 +6,15 @@ import 'package:device_info_plus/device_info_plus.dart';
 class DeviceInforService {
   DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
-  Future<String> get deviceInfo async {
+  Future<Map<String, dynamic>> get deviceInfo async {
     if (Platform.isWindows) {
       WindowsDeviceInfo wdi = await deviceInfoPlugin.windowsInfo;
-      return wdi.userName;
+      return wdi.data;
     } else if (Platform.isLinux) {
       LinuxDeviceInfo ldi = await deviceInfoPlugin.linuxInfo;
-      return ldi.prettyName;
+      return ldi.data;
     } else {
-      return "Cant detect device";
+      return {"Data": "Data not found"};
     }
   }
 }

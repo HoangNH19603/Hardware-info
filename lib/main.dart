@@ -29,20 +29,29 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     DeviceInforService dis = DeviceInforService();
     return Scaffold(
-      body: Center(
-        child: FutureBuilder(
-          future: dis.deviceInfo,
-          builder: (context, snapshot) {
-            Widget wg;
-            if (snapshot.hasData) {
-              // String data = snapshot.data as String;
-              wg = Text("${snapshot.data}");
-            } else {
-              wg = const CircularProgressIndicator();
-            }
-            return wg;
-          },
-        ),
+      body: FutureBuilder(
+        future: dis.deviceInfo,
+        builder: (context, snapshot) {
+          List<Text> data = [];
+          // Widget wg;
+          if (snapshot.hasData) {
+            print(snapshot.data);
+              snapshot.data?.forEach((key, value) {data.add(Text(value));});
+            //   // String data = snapshot.data as String;
+            //   // wg = Text("${snapshot.data}");
+            // return const Text("data");
+            return Column(
+              children: data,
+            );
+          } else {
+            print("Have not data");
+            //   snapshot.data?.forEach((key, value) {data.add(Text(value));});
+            return const CircularProgressIndicator();
+          }
+          return const Column(
+            children: [Text("data")],
+          );
+        },
       ),
     );
   }
